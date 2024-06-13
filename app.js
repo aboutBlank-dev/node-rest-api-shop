@@ -2,10 +2,19 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config();
 
 //Routes
 const productRoutes = require("./api/routes/products");
 const orderRoutes = require("./api/routes/orders");
+
+//Connect to MongoDB
+const pw = process.env.MONGO_ATLAS_PW;
+mongoose.connect(
+  `mongodb+srv://josecolaco1999:${pw}@node-rest-shop.io4bcpx.mongodb.net/?retryWrites=true&w=majority&appName=node-rest-shop`
+);
 
 //.use() adds middlewares
 app.use(morgan("dev"));
